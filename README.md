@@ -1,152 +1,256 @@
-# OCR-based Medical Data Extraction Project
+# 🏥 OCR-based Medical Data Extraction Project
 
-## Overview
+> 🔧 Built as part of the **Codebasics Bootcamp** Python course.
+> 📚 Inspired by and implemented using lessons from the [Codebasics Python course](https://codebasics.io) — check it out if you're interested in learning by building real-world projects.
 
-This project was developed as part of the CodeBasics Python course. The goal is to create an automated system that extracts important data from medical documents like prescriptions and patient details using OCR (Optical Character Recognition). By using Python and various libraries, this project helps streamline the data extraction process for health insurance companies, reducing manual work and error rates, and improving efficiency.
+---
 
-The OCR-based data extraction is specifically designed to help insurance companies process medical documents more efficiently, especially when there is a large volume of files to be processed, such as during the pandemic.
+## 📌 Problem Statement
 
-### Problem Statement
+Insurance companies receive **medical prescriptions and patient documents** in scanned format (images/PDFs). Extracting information manually from these documents is time-consuming, error-prone, and not scalable—especially during peak periods like pandemics.
 
-Health insurance companies must follow strict government regulations to issue claims, which requires processing images of patient details and prescriptions. Traditionally, these images are manually processed by outsourcing companies like “Mr. X Data Analytics” to extract useful data. However, this process is slow, error-prone, and cannot keep up with high volumes.
+A company like “Mr. X Data Analytics” processes this data manually, but they’re now looking to upgrade to a **semi-automated software system** to boost productivity and accuracy.
 
-### Solution Approach
+---
 
-The solution is to automate the extraction of data from medical images using Python libraries like `pytesseract`, `opencv`, and `regex`. This approach reduces human intervention and speeds up the process, ensuring that the extracted data is accurate and ready for review and submission.
+## ✅ Solution Overview
 
-While the system automates extraction, a human is still involved to verify and correct any potential errors.
+This project automates the **OCR-based data extraction** from patient and prescription documents using Python and tools like **Tesseract OCR**, **OpenCV**, **Regex**, and **FastAPI**.
 
-## Technologies Used
+Instead of typing data manually:
 
-* **Python**: The main programming language used for the implementation.
-* **pytesseract**: A Python wrapper for Google's Tesseract-OCR engine used to extract text from images.
-* **opencv**: Used for image preprocessing to improve the quality of the text extraction.
-* **pdf2image**: Converts PDF files into images to be processed by OCR.
-* **Regular Expressions (regex)**: Used to filter and extract specific patterns from the OCR data.
-* **pytest**: For test-driven development (TDD), used to write tests for the functionality.
-* **FastAPI**: For hosting the backend service to handle OCR requests.
-* **Postman**: Used to test HTTP requests to the backend service.
+* 🧠 The system **extracts text** from images
+* 🔍 Cleans and **filters it using Regex**
+* 🧪 Validates with test cases
+* 🚀 Runs on a FastAPI server
+* 👨‍⚕️ A human only **reviews** and submits the corrected output
 
-## Project Features
+---
 
-* **PDF to Image Conversion**: The project starts by converting PDF medical documents into images.
-* **Image Preprocessing**: We apply preprocessing techniques (e.g., adaptive thresholding) to enhance image quality for better OCR results.
-* **Data Extraction**: Once the images are processed, `pytesseract` extracts relevant data from the images.
-* **Regex Pattern Matching**: Regex is used to extract specific data such as doctor names, patient details, medication information, etc.
-* **Test-driven Development (TDD)**: The project was built using TDD principles to ensure high-quality code with automated tests.
-* **Backend with FastAPI**: The OCR extraction functionality is exposed via a FastAPI backend.
+## 🔧 Technologies Used
 
-## Installation Guide
+| Tool / Library | Purpose                                |
+| -------------- | -------------------------------------- |
+| Python         | Core programming language              |
+| OpenCV         | Image preprocessing                    |
+| Pytesseract    | OCR - Optical Character Recognition    |
+| PDF2Image      | Converts PDFs to images                |
+| Regex          | Pattern matching & data extraction     |
+| Pytest         | Unit testing (Test-Driven Development) |
+| FastAPI        | API backend server                     |
+| Postman        | Testing HTTP endpoints                 |
 
-Follow these steps to install and run the project on your local system.
+---
 
-### Prerequisites
+## ⚙️ Detailed Workflow Steps
 
-Ensure that you have Python 3.x installed. You can download it from [here](https://www.python.org/downloads/).
+### 1. 📥 PDF to Image Conversion
 
-### Step 1: Clone the Repository
+* Used **`pdf2image`** library to convert PDF files (like prescriptions or reports) into image format.
+* This is required because **Tesseract works on images**, not PDFs.
+
+### 2. 🖼️ Raw OCR (Without Preprocessing)
+
+* Applied **pytesseract** on the raw images.
+* However, due to shadows, fonts, and formatting, **raw extraction was inaccurate**.
+
+Example (without preprocessing):
+
+```
+Dr John Smith, M.D
+2 Non-Important Street,
+New York, Phone (000)-111-2222
+```
+
+### 3. 🧹 Image Preprocessing using OpenCV
+
+* Implemented **adaptive thresholding** with OpenCV:
+
+  * Divides image into regions and applies different thresholds.
+  * Removes shadows and improves contrast.
+* Resulted in **much cleaner image** and **better OCR results**.
+
+Example (after preprocessing):
+
+```
+Prednisone, Taper 5 mg every 3 days
+Lialda - take 2 pill every day for 1 month
+```
+
+### 4. 🔎 Extracting Specific Data Using Regex
+
+* Built **custom regex patterns** to extract:
+
+  * Doctor name
+  * Patient name and address
+  * Date
+  * Medicines and instructions
+* Patterns designed based on standard formats in medical docs.
+
+> ✅ Tip: Used [regex101.com](https://regex101.com/) to build and test patterns interactively.
+
+### 5. 🧪 Testing with Pytest (TDD)
+
+* Used **pytest** for test-driven development.
+* Wrote unit tests for:
+
+  * Regex extractors
+  * OCR output cleanup
+  * API response validation
+
+### 6. 🚀 FastAPI Backend
+
+* Hosted the logic using **FastAPI** for quick and scalable API serving.
+* Features:
+
+  * Auto Swagger docs
+  * Input validation using Pydantic
+  * Runs with `uvicorn` for development
+
+### 7. 📬 Testing API with Postman
+
+* No frontend UI is built.
+* Used **Postman** to:
+
+  * Send image/PDF files as HTTP POST requests
+  * View extracted output in JSON
+  * Validate and iterate over endpoint behavior
+
+---
+
+## 📥 How to Install and Run the Project
+
+### ✅ Prerequisites
+
+* Python 3.7+
+* [Tesseract OCR Installed](https://github.com/tesseract-ocr/tesseract)
+* Git
+* Postman (for API testing)
+
+---
+
+### 🔧 Step-by-Step Installation Guide
+
+#### Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/OCR-Medical-Data-Extraction.git
-```
-
-Navigate to the project folder:
-
-```bash
 cd OCR-Medical-Data-Extraction
 ```
 
-### Step 2: Set Up a Virtual Environment (Optional but Recommended)
-
-Create a virtual environment to isolate the dependencies:
+#### Step 2: Set Up Virtual Environment
 
 ```bash
 python -m venv venv
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
 ```
 
-Activate the virtual environment:
-
-* On Windows:
-
-  ```bash
-  .\venv\Scripts\activate
-  ```
-* On macOS/Linux:
-
-  ```bash
-  source venv/bin/activate
-  ```
-
-### Step 3: Install Dependencies
-
-Install the required Python libraries by running:
+#### Step 3: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Make sure `requirements.txt` includes libraries like `opencv-python`, `pytesseract`, `pdf2image`, `fastapi`, `pytest`, and `regex`.
+Make sure the following are in `requirements.txt`:
 
-### Step 4: Install Tesseract OCR
+```txt
+opencv-python
+pytesseract
+pdf2image
+regex
+fastapi
+uvicorn
+pytest
+```
 
-You need to install Tesseract OCR on your system:
+#### Step 4: Install Tesseract OCR Engine
 
-* **Windows**: Download the installer from [here](https://github.com/UB-Mannheim/tesseract/wiki).
-* **macOS**: Install it using Homebrew:
+* **Windows**: [Download here](https://github.com/UB-Mannheim/tesseract/wiki)
+* **macOS**:
 
   ```bash
   brew install tesseract
   ```
-* **Linux**: Use your package manager to install it:
+* **Linux**:
 
   ```bash
   sudo apt-get install tesseract-ocr
   ```
 
-### Step 5: Running the Application
+Make sure the OCR engine path is correctly set in your code or environment variable.
 
-To run the FastAPI server, execute the following command:
+#### Step 5: Run the FastAPI Server
 
 ```bash
 uvicorn main:app --reload
 ```
 
-This will start the backend server, and you can interact with it by making HTTP requests. The server should be running at `http://127.0.0.1:8000`.
+API will be hosted at:
+📍 `http://127.0.0.1:8000`
+📘 Docs available at:
+📍 `http://127.0.0.1:8000/docs`
 
-### Step 6: Testing the Application
+#### Step 6: Test Using Postman
 
-Use **Postman** to test the server and send HTTP requests to extract data from medical images.
+* Method: `POST`
+* URL: `http://127.0.0.1:8000/extract`
+* Upload image or PDF file
+* View extracted data in response
 
-* Set the request type to `POST` and upload the image file (patient details or prescription).
-* The backend will process the image and return the extracted data.
-
-Alternatively, you can use **pytest** to run tests:
+#### Step 7: Run Tests (Optional)
 
 ```bash
 pytest
 ```
 
-### Step 7: Verify Output
+---
 
-Once the data is extracted, verify the results for accuracy. If there are any issues, the extracted data will be flagged for manual review.
+## 📊 Results
 
-## Workflow Diagram
-
-1. **Upload Image** → **PDF to Image Conversion** → **Image Preprocessing** → **OCR Extraction** → **Data Extraction Using Regex** → **Return Extracted Data**
-
-## Results
-
-This project successfully automates the data extraction process, saving time and reducing errors. The results can be integrated into existing workflows for improved efficiency and faster turnaround times for insurance companies.
-
-## Benefits
-
-* **Time-saving**: Reduces the manual effort of typing data by automating extraction.
-* **Cost-effective**: Lowers operational costs by minimizing the need for human intervention.
-* **Accurate**: Less prone to errors compared to manual data entry.
-* **Scalable**: Can handle large volumes of documents, improving productivity during peak seasons.
-
-## Conclusion
-
-The OCR-based Medical Data Extraction project is a powerful solution to streamline the processing of medical documents. By combining OCR, image processing, and regular expressions, this system can automatically extract valuable data from prescriptions and patient details, saving time and resources for healthcare insurance companies.
+* Accurate data extraction from both prescription and patient detail documents.
+* Significant improvement in OCR accuracy after preprocessing.
+* Regex-based filtering ensures only **relevant medical data** is captured.
 
 ---
+
+## 📈 Benefits
+
+✅ Saves 30+ seconds per document
+✅ Increases throughput without increasing workforce
+✅ Reduces errors due to manual typing
+✅ Seamlessly integrates with existing legacy software
+✅ Human-in-the-loop ensures high data quality
+
+---
+
+## 📦 Project Structure
+
+```
+OCR-Medical-Data-Extraction/
+│
+├── main.py                  # FastAPI app
+├── processor/
+│   ├── image_converter.py   # PDF to image logic
+│   ├── preprocessor.py      # Image thresholding and cleanup
+│   ├── extractor.py         # Tesseract + Regex logic
+│
+├── tests/
+│   ├── test_extraction.py   # Pytest cases
+│
+├── requirements.txt
+├── README.md
+```
+
+---
+
+## 🧠 About
+
+A backend project to automate data extraction from medical prescriptions and documents using OCR and pattern recognition.
+
+> Built with ❤️ during the **Codebasics Bootcamp Python Course**
+
+---
+
