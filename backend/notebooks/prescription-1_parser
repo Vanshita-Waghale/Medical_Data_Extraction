@@ -1,0 +1,203 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "7a13d6fd-28e7-415d-bee4-1c0a7d8aea5e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pdf2image import convert_from_path"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "e9255133-92f4-42b9-af38-6557edea5c97",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pages = convert_from_path(r'docs\\prescription-1\\pre_3.pdf', poppler_path=r'C:\\poppler-23.07.0\\Library\\bin')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "15fae477-1247-4ade-9d2f-223e6f8fb5e9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pages[0].show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "f8cbd693-d6fe-4e4a-8c13-684f954caeea",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pytesseract"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "81c52f20-459b-429e-8d84-365cc7414ad7",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Dr. Nitin G. Barde\n",
+      "\n",
+      "MBRS, MD (Dermatotogy)\n",
+      "FRGUES (Fatiowship In Dermato-Surgery)\n",
+      "\n",
+      "Consuttant Dermatologist Cosmetciogtn and\n",
+      "\n",
+      "Hair Trenepient Surgeon\n",
+      "\n",
+      "Reg No 20070)\n",
+      "\n",
+      "Wob.: 98221 1 76877, 866 966 6677, 88066 66528 (For Appointment) :\n",
+      "\n",
+      "Hair\n",
+      "Hair Transplant\n",
+      "E Hair Transplant\n",
+      "PRP (Platiet Rich Plasma) Therapy\n",
+      "Ip Micropigmentation\n",
+      "therapy\n",
+      "brow Restoration\n",
+      "rd Hair Restoration\n",
+      "\n",
+      "ie Treatment\n",
+      "\n",
+      "Pimple / Acne Scor Treatment\n",
+      "Facial / Meso Glow\n",
+      "\n",
+      "Chemical Peels\n",
+      "Microdermabrasion (Skin Polishing)\n",
+      "Pigment Reduction\n",
+      "\n",
+      "Skin\n",
+      "\n",
+      "Wart Removal\n",
+      "\n",
+      "Mole Removal\n",
+      "\n",
+      "Tattoo Removal\n",
+      "\n",
+      "Skin Rejuvenation / Glow\n",
+      "\n",
+      "Cosmefic Surgery\n",
+      "Vitiligo Surgery (White Patches)\n",
+      "Mole Removal\n",
+      "Ear Lobe Repair\n",
+      "Face / Neck Lift\n",
+      "\n",
+      "grole Creation\n",
+      "\n",
+      "1 Crafting\n",
+      "\n",
+      "Scar Surgery\n",
+      "Liposuction\n",
+      "\n",
+      "Anlioging\n",
+      "Botox\n",
+      "\n",
+      "Dermal Filler\n",
+      "\n",
+      "Skin Tightening\n",
+      "\n",
+      "Thread Lift\n",
+      "\n",
+      "Autologous Fat Transfer\n",
+      "\n",
+      "Loser Treatments\n",
+      "\n",
+      "Laser Hair Removal\n",
+      "\n",
+      "Laser for Pimple / Acne Scars\n",
+      "Laser for Tattoo Removal\n",
+      "\n",
+      "This Paper can not be used for any Medicolegal Purpose Get Well Soon..!!\n",
+      "\n",
+      "501 & 510, 5th Floor, ’A’ Wing, Lokmat Building, Ramdaspeth, Nagpur-440012.\n",
+      "Website : www.radianceclinic.co.in E-mail : nitinbarde@hotmail.com\n",
+      "\n",
+      "AADIANCE\n",
+      "\n",
+      "~ SKIN\\O/ANTIAGING &\n",
+      "HAIR TRANSPLANT CLINIC\n",
+      "\n",
+      "Name: — Vanshita Waghale Patient 1D: 7560\n",
+      "Gender: Female Age: 18 yrs EncounterID28656\n",
+      "ress Nagpur OPD Date:16-Oct-2020 aaa\n",
+      "\n",
+      "1. Moisturex Wash Topical, 1 times a Day for 60 days,\n",
+      "Instructions: aie rarest BTST aTRUY\n",
+      "\n",
+      "2. Venusia Max cream Topical, 3 times a Day for 60 days, / Mon la Roxy\n",
+      "Instructions: att Sar wat Heniast FT HeaaTSaT =_—\n",
+      "\n",
+      "3.Oilatum cream Topical, 2 times a Day for 20 days,\n",
+      "Instructions: ett dat Say Hepes ¢ eae hx ny\n",
+      "\n",
+      ", .. a\n",
+      "4. Flucort cream Topical, 2 times a Day for 20 days, ’ onke wai\n",
+      "Instructions: alet_ dat acl Peres ¢ deacnrast <7\n",
+      "\n",
+      "5. Tacroz forte lotion 0.1% Topical, 7 times a Day for 30 days,\n",
+      "Instructions: fedatdet 1 dar\n",
+      "= IAD\n",
+      "\n",
+      "a\n",
+      "\n",
+      "Foilow-Up on: 15-Dec-2020\n",
+      "Printed on:16-Oct-2020 17:36:20 1 Nitin\n",
+      "Powered by EMS-Nosocomosys\n",
+      "\n",
+      "Timing\n",
+      "Mon - Fri: Nona 2p\n"
+     ]
+    }
+   ],
+   "source": [
+    "pytesseract.pytesseract.tesseract_cmd=r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'\n",
+    "text = pytesseract.image_to_string(pages[0], lang='eng')\n",
+    "print(text)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d71f5df3-87ff-4351-9e21-8f1354d9b325",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.10"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
